@@ -4,13 +4,13 @@
 #include <string_view>
 #include <unordered_map>
 
-const int port_number = 8000;
+const int port_number = 8080;
 std::string message = "Hello " + std::to_string(port_number);
 
 int main() {
     uWS::App()
         .get("/hello", [](auto *res, auto *req) { res->end(message); })
-        .listen(port_number, [](auto *listenSocket) {
+        .listen("0.0.0.0", port_number, [](auto *listenSocket) {
                 if (listenSocket)
                 {
                     std::cout << "Listening at " << port_number << "...\n";
