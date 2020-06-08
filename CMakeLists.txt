@@ -19,8 +19,12 @@ if(NOT MAKE)
     MESSAGE( FATAL_ERROR "make program not found" )
 else()
     MESSAGE("GNU make found")
+    if(NOT EXISTS ${EcosystemWebApp_SOURCE_DIR}/extern/uWebSockets/uSockets/uSockets.a)
+        execute_process(COMMAND ${MAKE} -C ${EcosystemWebApp_SOURCE_DIR}/extern/uWebSockets
+                        COMMAND_ECHO STDOUT)
+    endif()
 endif()
 
 set(CMAKE_CXX_FLAGS "-std=c++17 -O3 -fopenmp -march=native")
-add_subdirectory(scripts)
+#add_subdirectory(scripts)
 add_subdirectory(src)
